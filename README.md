@@ -42,8 +42,7 @@ Custom algorithm that removes duplicates without data loss. It checks multiple c
 
 This repository contains only the **source code** for automation. No spreadsheets with real company or personal data have been or will be shared publicly, in compliance with data protection laws.
 
----
-Developed for Sales Ops and Commercial Intelligence optimization.
+
 
 ♡‧₊˚✧
 ### Developed by **Débora Tavares**
