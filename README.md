@@ -1,4 +1,4 @@
-[🇧🇷 Leia em Português](README_pt.md)
+[🇧🇷 Leia em português](README_pt.md)
 
 # ⭐ Lead qualification pipeline
 
