@@ -1,4 +1,4 @@
-[us Read in english](README.md)
+[Read in english](README.md)
 
 # ⭐ Pipeline de limpeza e qualificação de leads (construção civil)
 
