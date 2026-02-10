@@ -1,7 +1,5 @@
 [🇧🇷 Leia em Português](README_pt.md)
 
-[🇧🇷 Leia em Português](README_pt.md)
-
 # ⭐ Lead qualification pipeline
 
 This project consists of an automated Python script for cleaning, standardizing, and qualifying company databases (leads), specifically focused on the **construction sector**.
