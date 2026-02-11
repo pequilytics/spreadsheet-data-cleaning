@@ -5,13 +5,12 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 > **Automated cleaning, standardization, and intelligent deduplication for company databases.**
->
-> *Higienização, padronização e deduplicação inteligente automatizada para bases de empresas.*
 
 ---
 
-### 🛎️ Language | Idioma
-[English version](README.md) | [🇧🇷 Versão em português](README_pt.md)
+<p align="center">
+  <a href="#README_pt.md">🇧🇷 Leia em Português</a>
+</p>
 
 ---
 
@@ -30,8 +29,8 @@ The goal is to transform raw, "dirty" lists into a reliable **ICP (Ideal Custome
 Unlike standard Excel or Pandas deduplication methods, this algorithm uses a **hierarchical and safe approach**:
 * **Hierarchy of trust:** checks for duplicates in a specific priority order:
     1.  `CNPJ` (unique tax ID - strongest match)
-    2.  `Website` (digital footprint grouping)
-    3.  `E-mail` and `Phone` (direct contacts)
+    2.  `Website`
+    3.  `E-mail` and `Phone`
     4.  `Company Name` (fuzzy text match)
 * **Safe-null logic:** the algorithm **does not delete** rows simply because a field is empty. If a company lacks a website, it is preserved to be checked against phone or email records later in the pipeline.
 
