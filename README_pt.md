@@ -5,7 +5,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 > **Higienização, padronização e deduplicação inteligente automatizada para bases de empresas (foco em construção civil).**
-> [🇧🇷 Read in english](README.md)
+> 
+> [Read in english](README.md)
 
 ---
 
