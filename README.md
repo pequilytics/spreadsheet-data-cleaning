@@ -6,7 +6,7 @@
 
 > **Automated cleaning, standardization, and intelligent deduplication for company databases.**
 
-<p align="right">
+<p align="left">
   <a href="#README_pt.md">🇧🇷 Leia em Português</a>
 </p>
 
