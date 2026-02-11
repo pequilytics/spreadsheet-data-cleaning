@@ -6,7 +6,7 @@
 
 > **Automated cleaning, standardization, and intelligent deduplication for company databases.**
 
-> <p align="center">
+<p align="center">
   <a href="#README_pt.md"> Leia em português</a>
 </p>
 
@@ -77,7 +77,7 @@ MAPA_COLUNAS = {
 
 ## ⚠️ Privacy note (GDPR/LGPD)
 
-This repository contains only the source code for automation. No spreadsheets containing real company data or personal information have been or will be shared publicly, in full compliance with data protection laws (GDPR/LGPD).
+This repository contains only the **source code** for automation. No spreadsheets containing real company data or personal information have been or will be shared publicly, in full compliance with data protection laws (GDPR/LGPD).
 
 
 
