@@ -75,8 +75,8 @@ MAPA_COLUNAS = {
 This repository contains only the **source code** for automation. No spreadsheets containing real company data or personal information have been or will be shared publicly, in full compliance with data protection laws (GDPR/LGPD).
 
 
+♡‧₊˚✧
 
----
 ### Developed by **Débora Tavares**
 *Working in Sales Operations & Data Intelligence*
 
