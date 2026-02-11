@@ -88,4 +88,6 @@ This repository contains only the source code for automation. No spreadsheets co
 ---
 ### Developed by **Débora Tavares**
 *Working in Sales Operations & Data Intelligence*
+
+
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deborasiltavares/)
