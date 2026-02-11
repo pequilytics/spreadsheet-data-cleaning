@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 > **Automated cleaning, standardization, and intelligent deduplication for company databases.**
+> 
 > [🇧🇷 Leia em português](README_pt.md)
 
 ---
