@@ -44,8 +44,7 @@ Data is standardized at runtime for accurate comparison (without altering the or
 * **IDs/Phones:** removal of non-numeric characters and formatting.
 * **Text:** handling of extra spaces, case sensitivity and special characters.
 
-
-### ⚙️ Configuration
+### Configuration
 
 The script is highly configurable via a mapping dictionary. You can adapt it to any spreadsheet layout by modifying the `MAPA_COLUNAS` variable in the script:
 
@@ -59,7 +58,7 @@ MAPA_COLUNAS = {
 ```
 
 
-## 💫 Tech Stack
+## 💫 Tech stack
 
 * **Python 3.x**
 * **Pandas** (data manipulation)
@@ -67,7 +66,7 @@ MAPA_COLUNAS = {
 * **OpenPyXL** (excel I/O)
 
 
-## 📋 How to Use
+## 📋 How to use
 
 1.  Clone this repository.
 2.  Install dependencies:
@@ -79,7 +78,7 @@ MAPA_COLUNAS = {
 5.  Run the script to generate the clean output file.
 
 
-## ⚠️ Privacy Note (GDPR/LGPD)
+## ⚠️ Privacy note (GDPR/LGPD)
 
 This repository contains only the source code for automation. No spreadsheets containing real company data or personal information have been or will be shared publicly, in full compliance with data protection laws (GDPR/LGPD).
 
