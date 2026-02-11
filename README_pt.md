@@ -44,11 +44,10 @@ O script é altamente configurável através de um dicionário de mapeamento. Vo
 
 ```python
 MAPA_COLUNAS = {
-    "CNPJ": "CNPJ",               # Coluna Chave: Nome no Excel
+    "CNPJ": "CNPJ",               # Coluna chave: nome no Excel
     "Razão Social": "Razão Social",
     "Website": "Websites",
     "E-mail": "E-mails",
-    # ... adicione suas colunas
 }
 ```
 
