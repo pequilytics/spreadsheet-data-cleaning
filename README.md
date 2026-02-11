@@ -28,7 +28,7 @@ The goal is to transform raw, "dirty" lists into a reliable **ICP (Ideal Custome
 
 #### 1. Waterfall deduplication
 Unlike standard Excel or Pandas deduplication methods, this algorithm uses a **hierarchical and safe approach**:
-* **Hierarchy of Trust:** Checks for duplicates in a specific priority order:
+* **Hierarchy of trust:** checks for duplicates in a specific priority order:
     1.  `CNPJ` (unique tax ID - strongest match)
     2.  `Website` (digital footprint grouping)
     3.  `E-mail` and `Phone` (direct contacts)
