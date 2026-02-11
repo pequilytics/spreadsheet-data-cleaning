@@ -44,7 +44,7 @@ The script is highly configurable via a mapping dictionary. You can adapt it to 
 
 ```python
 MAPA_COLUNAS = {
-    "CNPJ": "CNPJ",               # Key Column: Excel Header Name
+    "CNPJ": "CNPJ",               # Key column: Excel header name
     "Razão Social": "Razão Social",
     "Website": "Websites",
     "E-mail": "E-mails"
