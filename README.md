@@ -12,9 +12,6 @@
 
 ---
 
-### English version
-
-
 ## ⭐ Overview
 
 This project consists of an automated Python script for **cleaning, standardizing, and qualifying** company databases (leads), specifically focused on the **construction and real estate sector**.
