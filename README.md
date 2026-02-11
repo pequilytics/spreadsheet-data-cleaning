@@ -1,31 +1,71 @@
-[🇧🇷 Leia em português](README_pt.md)
+# ⭐ Lead qualification & deduplication Pipeline
 
-# ⭐ Lead qualification pipeline
+[![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)](https://pandas.pydata.org/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-This project consists of an automated Python script for cleaning, standardizing, and qualifying company databases (leads), specifically focused on the **construction sector**.
-The goal is to transform raw, "dirty" lists into a qualified **ICP (Ideal Customer Profile)** base, filtering for relevant construction and real estate development companies while removing complex duplicates.
+> **Automated cleaning, standardization, and intelligent deduplication for company databases.**
+>
+> *Higienização, padronização e deduplicação inteligente automatizada para bases de empresas.*
+
+♡‧₊˚✧
+
+### 🌐 Language / Idioma
+[English version](README.md) | [🇧🇷 Versão em português](README_pt.md)
+
+♡‧₊˚✧
+
+## English version
+
+
+## 📋 Overview
+
+This project consists of an automated Python script for **cleaning, standardizing, and qualifying** company databases (leads), specifically focused on the **construction and real estate sector**.
+The goal is to transform raw, "dirty" lists into a reliable **ICP (Ideal Customer Profile)** base, applying advanced algorithms to remove complex duplicates without losing valuable contact information.
+
 
 ## 🏷️ Features
 
-### 1. Smart CNAE (tax code) filtering
-The script isolates only companies with strategic economic activities, eliminating small renovations and irrelevant works:
-- **4120-4/00:** construction of buildings.
-- **4110-7/00:** real estate development.
-- **4399-1/01:** construction management.
+#### 1. Waterfall deduplication
+Unlike standard Excel or Pandas deduplication methods, this algorithm uses a **hierarchical and safe approach**:
+* **Hierarchy of Trust:** Checks for duplicates in a specific priority order:
+    1.  `CNPJ` (unique tax ID - strongest match)
+    2.  `Website` (digital footprint grouping)
+    3.  `E-mail` & `Phone` (direct contacts)
+    4.  `Company Name` (fuzzy text match)
+* **Safe-null logic:** the algorithm **does not delete** rows simply because a field is empty. If a company lacks a website, it is preserved to be checked against phone or email records later in the pipeline.
 
-### 2. Safe deduplication
-Custom algorithm that removes duplicates without data loss. It checks multiple criteria in priority order:
-1.  **CNPJ** (unique Tax ID).
-2.  **Website** (same group companies).
-3.  **E-mail and Phone** (repeated contacts).
-*Note: The algorithm protects empty fields, ensuring companies without a site/email are not incorrectly deleted.*
+#### 2. Completeness score
+Before removing a duplicate, the script calculates a *score* for each row. If multiple records exist for the same company, the system automatically preserves the one with the **most filled columns**, ensuring the highest data quality.
+
+#### 3. Smart normalization
+Data is standardized at runtime for accurate comparison (without altering the original saved data):
+* **Websites:** `https://www.site.com`, `www.site.com/`, and `site.com` are treated as identical.
+* **IDs/Phones:** removal of non-numeric characters and formatting.
+* **Text:** handling of extra spaces, case sensitivity and special characters.
+
+
+### ⚙️ Configuration
+
+The script is highly configurable via a mapping dictionary. You can adapt it to any spreadsheet layout by modifying the `MAPA_COLUNAS` variable in the script:
+
+```python
+MAPA_COLUNAS = {
+    "CNPJ": "CNPJ",               # Key Column: Excel Header Name
+    "Razão Social": "Razão Social",
+    "Website": "Websites",
+    "E-mail": "E-mails"
+}
+```
 
 
 ## 🛠️ Tech Stack
 
 * **Python 3.x**
-* **Pandas** (Data Manipulation)
-* **OpenPyXL** (Excel I/O)
+* **Pandas** (data manipulation)
+* **NumPy** (high-performance handling of null/NaN values)
+* **OpenPyXL** (excel I/O)
+
 
 ## 📋 How to Use
 
@@ -35,17 +75,17 @@ Custom algorithm that removes duplicates without data loss. It checks multiple c
     pip install pandas openpyxl
     ```
 3.  Place your raw spreadsheet in the project folder.
-4.  Open the `.ipynb` file (Jupyter Notebook) and adjust the input filename.
-5.  Run the cells to generate the clean output file.
+4.  Open the script and adjust the input filename and MAPA_COLUNAS if necessary.
+5.  Run the script to generate the clean output file.
+
 
 ## ⚠️ Privacy Note (GDPR/LGPD)
 
-This repository contains only the **source code** for automation. No spreadsheets with real company or personal data have been or will be shared publicly, in compliance with data protection laws.
+This repository contains only the source code for automation. No spreadsheets containing real company data or personal information have been or will be shared publicly, in full compliance with data protection laws (GDPR/LGPD).
 
 
 
 ♡‧₊˚✧
 ### Developed by **Débora Tavares**
 *Working in Sales Operations & Data Intelligence*
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/seu-link-aqui)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deborasiltavares/)
