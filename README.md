@@ -1,4 +1,4 @@
-# ⭐ Lead qualification & deduplication Pipeline
+# Lead qualification + deduplication pipeline
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)](https://pandas.pydata.org/)
@@ -10,7 +10,7 @@
 
 ---
 
-### 🌐 Language / Idioma
+### 🛎️ Language | Idioma
 [English version](README.md) | [🇧🇷 Versão em português](README_pt.md)
 
 ---
@@ -18,7 +18,7 @@
 ## English version
 
 
-## 📋 Overview
+## ⭐ Overview
 
 This project consists of an automated Python script for **cleaning, standardizing, and qualifying** company databases (leads), specifically focused on the **construction and real estate sector**.
 The goal is to transform raw, "dirty" lists into a reliable **ICP (Ideal Customer Profile)** base, applying advanced algorithms to remove complex duplicates without losing valuable contact information.
@@ -31,7 +31,7 @@ Unlike standard Excel or Pandas deduplication methods, this algorithm uses a **h
 * **Hierarchy of Trust:** Checks for duplicates in a specific priority order:
     1.  `CNPJ` (unique tax ID - strongest match)
     2.  `Website` (digital footprint grouping)
-    3.  `E-mail` & `Phone` (direct contacts)
+    3.  `E-mail` and `Phone` (direct contacts)
     4.  `Company Name` (fuzzy text match)
 * **Safe-null logic:** the algorithm **does not delete** rows simply because a field is empty. If a company lacks a website, it is preserved to be checked against phone or email records later in the pipeline.
 
@@ -59,7 +59,7 @@ MAPA_COLUNAS = {
 ```
 
 
-## 🛠️ Tech Stack
+## 💫 Tech Stack
 
 * **Python 3.x**
 * **Pandas** (data manipulation)
