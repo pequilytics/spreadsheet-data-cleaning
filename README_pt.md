@@ -1,31 +1,62 @@
-[Read in english](README.md)
+# Pipeline de qualificação e deduplicação de leads
 
-# ⭐ Pipeline de limpeza e qualificação de leads (construção civil)
+[![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)](https://pandas.pydata.org/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-Este projeto consiste em um script Python automatizado para limpeza, padronização e qualificação de bases de dados de empresas (leads), focado especificamente no setor de **construção civil**.
-O objetivo é transformar listas brutas e "sujas" em uma base qualificada de **ICP (Ideal Customer Profile)**, filtrando apenas construtoras e incorporadoras relevantes e removendo duplicidades complexas.
+> **Higienização, padronização e deduplicação inteligente automatizada para bases de empresas (foco em construção civil).**
 
+
+<p align="center">
+  <a href="#README.md"> Read in english</a>
+</p>
+
+---
+
+## ⭐ Visão geral
+Este projeto consiste em um script Python automatizado para **higienização, padronização e qualificação** de bases de dados de empresas (leads), com foco no **setor da construção civil**.
+
+O objetivo é transformar listas brutas e "sujas" em uma base **ICP (Ideal Customer Profile)** confiável, aplicando algoritmos avançados para remover duplicatas complexas sem perder contatos valiosos.
 
 ## 🏷️ Funcionalidades
 
-### 1. Filtragem inteligente por CNAE
-O script isola apenas empresas com atividades econômicas estratégicas, eliminando reformas pequenas e obras irrelevantes:
-- **4120-4/00:** construção de edifícios.
-- **4110-7/00:** incorporação de empreendimentos imobiliários.
-- **4399-1/01:** administração de obras.
+#### 1. deduplicação em cascata (waterfall)
+Diferente da remoção de duplicatas padrão do Excel ou Pandas, este algoritmo utiliza uma abordagem hierárquica e **segura**:
+* **Hierarquia de confiança:** verifica duplicidade na seguinte ordem de prioridade:
+    1.  `CNPJ` (identificador fiscal único)
+    2.  `Website`
+    3.  `E-mail` & `Telefone`
+    4.  `Razão Social` (nomes similares)
+* **Preservação de dados (safe-null):** o algoritmo **não exclui** linhas apenas porque um campo está vazio. Se uma empresa não tem site, ela é preservada para ser verificada pelo telefone ou e-mail.
 
-### 2. Deduplicação segura
-Algoritmo personalizado que remove duplicatas sem perder dados. Ele verifica múltiplos critérios em ordem de prioridade:
-1.  **CNPJ** (identificador único).
-2.  **Website** (empresas do mesmo grupo).
-3.  **E-mail e Telefone** (contatos repetidos).
-*Obs: O algoritmo protege campos vazios, garantindo que empresas sem site/email não sejam excluídas incorretamente.*
+#### 2. Score de completude
+Antes de remover uma duplicata, o script calcula um *score* para cada linha. Se houver três registros da mesma empresa, o sistema manterá automaticamente aquele que tiver **mais colunas preenchidas**, garantindo a melhor qualidade de dado possível.
 
+#### 3. Normalização inteligente
+Os dados são padronizados em tempo de execução para comparação (sem alterar o dado original salvo):
+* **Websites:** `https://www.site.com`, `www.site.com/` e `site.com` são tratados como iguais.
+* **CNPJ/Tel:** remoção de pontuações e formatação.
+* **Textos:** tratamento de espaços extras e *case sensitivity*.
 
-## 🛠️ Tecnologias utilizadas
+###  Configuração
+
+O script é altamente configurável através de um dicionário de mapeamento. Você pode adaptar para qualquer planilha alterando a variável `MAPA_COLUNAS` no código:
+
+```python
+MAPA_COLUNAS = {
+    "CNPJ": "CNPJ",               # Coluna Chave: Nome no Excel
+    "Razão Social": "Razão Social",
+    "Website": "Websites",
+    "E-mail": "E-mails",
+    # ... adicione suas colunas
+}
+```
+
+## 💫 Tecnologias utilizadas
 
 * **Python 3.x**
-* **Pandas** (Manipulação de dados e Dataframes)
+* **Pandas** (manipulação de dados e dataframes)
+* **NumPy** (tratamento de alta performance para valores nulos)
 * **OpenPyXL** (Leitura e escrita de arquivos Excel)
 
 
@@ -37,13 +68,12 @@ Algoritmo personalizado que remove duplicatas sem perder dados. Ele verifica mú
     pip install pandas openpyxl
     ```
 3.  Coloque sua planilha bruta na pasta do projeto.
-4.  Abra o arquivo `.ipynb` (Jupyter notebook) e ajuste o nome do arquivo de entrada.
-5.  Execute as células para gerar o arquivo `planilha-limpinha.xlsx`.
+4.  Abra o script e ajuste o nome do arquivo de entrada e o MAPA_COLUNAS se necessário.
+5.  Execute o script para gerar o arquivo limpo.
 
 ## ⚠️ Nota sobre privacidade (LGPD)
 
-Este repositório contém apenas o **código-fonte** da automação. Nenhuma planilha com dados reais de empresas ou pessoas foi ou será compartilhada publicamente, em conformidade com as leis de proteção de dados.
-
+Este repositório contém apenas o **código-fonte** da automação. Nenhuma planilha com dados reais de empresas ou dados pessoais foi ou será compartilhada publicamente, em conformidade com as leis de proteção de dados.
 
 
 ♡‧₊˚✧
