@@ -17,7 +17,7 @@ O objetivo é transformar listas brutas e "sujas" em uma base **ICP (Ideal Custo
 
 ## 🏷️ Funcionalidades
 
-#### 1. deduplicação em cascata (waterfall)
+#### 1. Deduplicação em cascata (waterfall)
 Diferente da remoção de duplicatas padrão do Excel ou Pandas, este algoritmo utiliza uma abordagem hierárquica e **segura**:
 * **Hierarquia de confiança:** verifica duplicidade na seguinte ordem de prioridade:
     1.  `CNPJ` (identificador fiscal único)
