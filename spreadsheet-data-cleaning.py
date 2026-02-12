@@ -20,11 +20,6 @@ ORDEM_VERIFICACAO = [
     "Razão Social", "Nome Fantasia", "Endereço"
 ]
 
-CNAES_DESEJADOS = [
-    "6201-5/01",  # Desenvolvimento de software          
-    "6204-0/00",  # Consultoria de TI
-    "6209-1/00"   # Suporte técnico, manutenção
-]
 
 # ♡‧₊˚✧ Padronização
 
@@ -54,6 +49,30 @@ def limpar_url(serie):
     s = s.str.replace(r"www\.", "", regex=True)
     s = s.str.rstrip("/")
     return s.replace({"nan": np.nan, "": np.nan})
+
+# ♡‧₊˚✧ Filtro CNAE
+
+def filtrar_cnae(df, coluna_cnae="CNAE", cnaes_permitidos=None):
+    """ Filtra apenas CNAEs desejados.
+    cnaes_permitidos: lista de CNAEs ou prefixos
+    """
+
+    if cnaes_permitidos is None:
+        return df
+
+    if coluna_cnae not in df.columns:
+        print("Coluna CNAE não encontrada. Pulando filtro.")
+        return df
+
+    df = df.copy()
+    df[coluna_cnae] = df[coluna_cnae].astype(str)
+
+    mask = df[coluna_cnae].str.startswith(tuple(cnaes_permitidos), na=False)
+    df_filtrado = df[mask]
+
+    print(f"CNAE filtro: {len(df)} → {len(df_filtrado)}")
+
+    return df_filtrado
 
 
 # ♡‧₊˚✧ Pipeline de deduplicação
@@ -138,9 +157,15 @@ if __name__ == "__main__":
     saida = "base_terceiros_limpo.xlsx"
 
     try:
+        CNAES_DESEJADOS = None  # ou ["6201-5/01", "6204-0/00"] se quiser ativar
+        
         df = pd.read_excel(entrada)
-
-        df = filtrar_cnae(df, cnaes_permitidos = CNAES_DESEJADOS)
+        
+        df = filtrar_cnae(
+        df,
+        coluna_cnae = "CNAE",
+        cnaes_permitidos = CNAES_DESEJADOS
+        )
         
         df_limpo = deduplicar_cascata(df, MAPA_COLUNAS, ORDEM_VERIFICACAO)
         
@@ -152,4 +177,3 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"ERRO CRÍTICO: {e}")
-
