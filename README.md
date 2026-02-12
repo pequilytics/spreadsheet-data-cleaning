@@ -36,30 +36,17 @@ Data is standardized at runtime for accurate comparison (without altering the or
 * **IDs/Phones:** removal of non-numeric characters and formatting.
 * **Text:** handling of extra spaces, case sensitivity and special characters.
 
-## 💡 Configuration 
-
-The script is highly configurable via a mapping dictionary. You can adapt it to any spreadsheet layout by modifying the `MAPA_COLUNAS` variable in the script:
-
-```python
-MAPA_COLUNAS = {
-    "CNPJ": "CNPJ",               # Key column: Excel header name
-    "Razão Social": "Razão Social",
-    "Website": "Websites",
-    "E-mail": "E-mails"
-}
-```
-
-### Optional ICP filtering (CNAE / industry codes)
+#### 4. Optional ICP filtering (CNAE / industry codes)
 
 In many real-world datasets, deduplication alone is not enough. This pipeline also supports optional industry filtering before the cleaning stage.
 
 The script can filter companies by a list of allowed industry codes (e.g., CNAE or similar classification systems) to ensure the final dataset aligns with a target ICP segment.
 
 This step is:
-* **Optional:**  can be turned on or off
-* **Configurable:** accepts any column name and list of codes
-* **Non-destructive:** only removes rows outside the target segment
-* **Generic:** works with any industry classification system
+* **Optional**;
+* **Configurable**;
+* **Non-destructive**;
+* **Works with any industry classification system**;
 
 ```python
 CNAES_DESEJADOS = ["6201-5/01", "6204-0/00", "6209-1/00"]  # example tech-related segments
@@ -73,9 +60,19 @@ df = filtrar_cnae(
 
 If no list is provided, the pipeline runs normally with no filtering.
 
-This design allows the script to be used both as:
-* a generic spreadsheet cleaning tool
-* a targeted ICP-building pipeline for specific market segments
+
+## 💡 Configuration 
+
+The script is highly configurable via a mapping dictionary. You can adapt it to any spreadsheet layout by modifying the `MAPA_COLUNAS` variable in the script:
+
+```python
+MAPA_COLUNAS = {
+    "CNPJ": "CNPJ",               # Key column: Excel header name
+    "Razão Social": "Razão Social",
+    "Website": "Websites",
+    "E-mail": "E-mails"
+}
+```
 
 
 ## 💫 Tech stack
