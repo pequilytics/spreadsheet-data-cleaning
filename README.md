@@ -12,7 +12,7 @@
 
 ## ⭐ Overview
 
-This project consists of an automated Python script for **cleaning, standardizing, and qualifying** company databases (leads), specifically focused on the **construction and real estate sector**.
+This project consists of an automated Python script for **cleaning, standardizing, and qualifying** company databases (leads).
 The goal is to transform raw, "dirty" lists into a reliable **ICP (Ideal Customer Profile)** base, applying advanced algorithms to remove complex duplicates without losing valuable contact information.
 
 
