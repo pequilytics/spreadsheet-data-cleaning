@@ -69,8 +69,10 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
             
         if chave in ["CNPJ", "Telefone"]:
             df[f"norm_{chave}"] = limpar_numeros(df[col_original])
+            
         elif chave == "Website":
             df[f"norm_{chave}"] = limpar_url(df[col_original])
+            
         else:
             df[f"norm_{chave}"] = limpar_texto(df[col_original])
 
@@ -139,6 +141,7 @@ if __name__ == "__main__":
         
     except FileNotFoundError:
         print(f"ERRO: O arquivo '{entrada}' não foi encontrado.")
+        
     except Exception as e:
-
         print(f"ERRO CRÍTICO: {e}")
+
