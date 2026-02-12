@@ -4,14 +4,14 @@
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)](https://pandas.pydata.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> **Higienização, padronização e deduplicação inteligente automatizada para bases de empresas (foco em construção civil).**
+> **Higienização, padronização e deduplicação inteligente automatizada para bases de empresas.**
 > 
 > [Read in english](README.md)
 
 ---
 
 ## ⭐ Visão geral
-Este projeto consiste em um script Python automatizado para **higienização, padronização e qualificação** de bases de dados de empresas (leads), com foco no **setor da construção civil**.
+Este projeto consiste em um script Python automatizado para **higienização, padronização e qualificação** de bases de dados de empresas (leads).
 
 O objetivo é transformar listas brutas e "sujas" em uma base **ICP (Ideal Customer Profile)** confiável, aplicando algoritmos avançados para remover duplicatas complexas sem perder contatos valiosos.
 
@@ -29,13 +29,38 @@ Diferente da remoção de duplicatas padrão do Excel ou Pandas, este algoritmo 
 #### 2. Score de completude
 Antes de remover uma duplicata, o script calcula um *score* para cada linha. Se houver três registros da mesma empresa, o sistema manterá automaticamente aquele que tiver **mais colunas preenchidas**, garantindo a melhor qualidade de dado possível.
 
-#### 3. Normalização inteligente
+#### 3. Padronização inteligente
 Os dados são padronizados em tempo de execução para comparação (sem alterar o dado original salvo):
 * **Websites:** `https://www.site.com`, `www.site.com/` e `site.com` são tratados como iguais.
 * **CNPJ/Tel:** remoção de pontuações e formatação.
 * **Textos:** tratamento de espaços extras e *case sensitivity*.
 
-###  Configuração
+### 4. Filtro opcional por segmento (CNAE ou equivalente)
+O pipeline também permite aplicar um filtro opcional de segmento antes da deduplicação.
+É possível definir uma lista de CNAEs (ou qualquer outro código de classificação) para manter apenas empresas dentro do perfil desejado.
+
+Esse filtro é:
+* **Opcional**;
+* **Configurável**;
+* **Não destrutivo**;
+* **Compatível com qualquer classificação de setor**.
+
+Exemplo de uso:
+
+```python
+CNAES_DESEJADOS = ["6201-5/01", "6204-0/00", "6209-1/00"]
+
+df = filtrar_cnae(
+    df,
+    coluna_cnae="CNAE",
+    cnaes_permitidos=CNAES_DESEJADOS
+)
+```
+
+Se nenhuma lista for informada, o script roda normalmente sem filtrar. 
+
+
+## 💡 Configuração
 
 O script é altamente configurável através de um dicionário de mapeamento. Você pode adaptar para qualquer planilha alterando a variável `MAPA_COLUNAS` no código:
 
