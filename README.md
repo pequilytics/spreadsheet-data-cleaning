@@ -46,7 +46,7 @@ This step is:
 * **Optional**;
 * **Configurable**;
 * **Non-destructive**;
-* **Works with any industry classification system**;
+* **Works with any industry classification system**.
 
 ```python
 CNAES_DESEJADOS = ["6201-5/01", "6204-0/00", "6209-1/00"]  # example tech-related segments
