@@ -23,7 +23,7 @@ ORDEM_VERIFICACAO = [
 
 # ♡‧₊˚✧ Padronização
 
-def limpar_apenas_numeros(serie):
+def limpar_numeros(serie):
     """Para CNPJ e Telefone"""
     # astype(str) converte NaN para "nan". O regex limpa. 
     # Depois substituímos vazios e "nan" literais por np.nan
@@ -57,9 +57,9 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
     df = df.copy()
     total_inicial = len(df)
 
-    print("1. Normalizando dados e calculando score.")
+    print("1. Padronizando dados e calculando score.")
 
-    # Criação de colunas normalizadas temporárias
+    # Criação de colunas padronizadas temporárias
     cols_norm_map = {}
     
     # Mapeamento dinâmico das funções de limpeza
@@ -68,20 +68,20 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
             continue
             
         if chave in ["CNPJ", "Telefone"]:
-            df[f"norm_{chave}"] = limpar_apenas_numeros(df[col_original])
+            df[f"norm_{chave}"] = limpar_numeros(df[col_original])
         elif chave == "Website":
             df[f"norm_{chave}"] = limpar_url(df[col_original])
         else:
             df[f"norm_{chave}"] = limpar_texto(df[col_original])
 
-    # Score de completude: define quem "ganha" em caso de conflito
+    # Score: define quem "ganha" em caso de conflito
     cols_score = [f"norm_{k}" for k in ordem_verificacao if f"norm_{k}" in df.columns]
-    df["score_completude"] = df[cols_score].notna().sum(axis=1)
+    df["score"] = df[cols_score].notna().sum(axis=1)
 
     # Colocamos as linhas mais completas no topo. O drop_duplicates mantém a primeira que encontrar.
-    df = df.sort_values("score_completude", ascending=False)
+    df = df.sort_values("score", ascending=False)
 
-    print("2. Executando deduplicação em cascata.")
+    print("2. Executando deduplicação.")
 
     for chave in ordem_verificacao:
         col_norm = f"norm_{chave}"
@@ -90,7 +90,7 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
         if col_norm not in df.columns:
             continue
 
-        # Separa linhas que têm valor (ex: tem email) das que não têm (email vazio)
+        # Separa linhas que tem valor (ex: tem email) das que não tem (email vazio)
         mask_valido = df[col_norm].notna()
         
         df_com_valor = df[mask_valido]
@@ -98,7 +98,7 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
 
         # Remove duplicatas APENAS entre quem tem o dado preenchido
         antes = len(df_com_valor)
-        df_com_valor = df_com_valor.drop_duplicates(subset=[col_norm], keep="first")
+        df_com_valor = df_com_valor.drop_duplicates(subset=[col_norm], keep= "first")
         removidos = antes - len(df_com_valor)
 
         if removidos > 0:
@@ -109,7 +109,7 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
 
     # Limpeza final das colunas auxiliares
     print("3. Finalizando.")
-    cols_temp = [c for c in df.columns if c.startswith("norm_") or c == "score_completude"]
+    cols_temp = [c for c in df.columns if c.startswith("norm_") or c == "score"]
     df = df.drop(columns=cols_temp)
 
     print("♡‧₊˚✧" * 10)
@@ -140,4 +140,5 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print(f"ERRO: O arquivo '{entrada}' não foi encontrado.")
     except Exception as e:
+
         print(f"ERRO CRÍTICO: {e}")
