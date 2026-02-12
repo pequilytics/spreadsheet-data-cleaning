@@ -123,8 +123,9 @@ def deduplicar_cascata(df, mapa_colunas, ordem_verificacao):
     return df
 
 print("♡‧₊˚✧" * 10)
-# ♡‧₊˚✧ Execução
 
+
+# ♡‧₊˚✧ Execução
 
 if __name__ == "__main__":
     # Necessário ajustar os nomes conforme necessário
@@ -144,4 +145,5 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"ERRO CRÍTICO: {e}")
+
 
