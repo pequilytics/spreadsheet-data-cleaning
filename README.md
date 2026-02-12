@@ -4,7 +4,7 @@
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)](https://pandas.pydata.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> **Automated cleaning, standardization, and intelligent deduplication for company databases.**
+> **Automated cleaning, standardization and intelligent deduplication for company databases.**
 > 
 > [🇧🇷 Leia em português](README_pt.md)
 
