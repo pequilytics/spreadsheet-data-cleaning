@@ -20,6 +20,11 @@ ORDEM_VERIFICACAO = [
     "Razão Social", "Nome Fantasia", "Endereço"
 ]
 
+CNAES_DESEJADOS = [
+    "6201-5/01",  # Desenvolvimento de software          
+    "6204-0/00",  # Consultoria de TI
+    "6209-1/00"   # Suporte técnico, manutenção
+]
 
 # ♡‧₊˚✧ Padronização
 
@@ -134,10 +139,12 @@ if __name__ == "__main__":
 
     try:
         df = pd.read_excel(entrada)
+
+        df = filtrar_cnae(df, cnaes_permitidos = CNAES_DESEJADOS)
         
         df_limpo = deduplicar_cascata(df, MAPA_COLUNAS, ORDEM_VERIFICACAO)
         
-        df_limpo.to_excel(saida, index=False)
+        df_limpo.to_excel(saida, index = False)
         print(f"Arquivo salvo com sucesso em: {saida}")
         
     except FileNotFoundError:
@@ -145,5 +152,4 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"ERRO CRÍTICO: {e}")
-
 
